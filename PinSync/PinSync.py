@@ -396,8 +396,10 @@ class Manager:
         # remove local files which have been deleted from pinterest
         for (k, v) in list(local.items()):
             if isinstance(v, dict):
+                cloud_section = {}
+                if k in cloud.keys():
+                    cloud_section = cloud[k]
                 local_section = v
-                cloud_section = cloud[k]
                 for (id, path) in list(local_section.items()):
                     if (id not in list(cloud_section.keys())):
                         self.manifest.delete(id, board, k)
